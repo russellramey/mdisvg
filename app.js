@@ -16,16 +16,38 @@ var app = express();
 // Main request of application, takes in paramters and returns Font Awesome icons
 app.get("/:provider/:icon/", function(request, response) {
 
-    // Get Provider
-    let provider = request.params.provider;
-    // Get Icon
-    let icon = request.params.icon;
+    // Process and gather request parameters
+    let params = {
+        // Provider Name
+        provider: request.params.provider,
+        // Icon Name
+        icon: request.params.icon,
+        // Icon Fill
+        fill: request.query.fill,
+        // Icon Style
+        style: request.query.style
+    };
 
-    // If provider and icon exists
-    if ( config.providers.indexOf(provider) >= 0 && icon ) {
+    // Validate provider request
+    let valid_provider = config.providers.find(obj => {
+        return obj.name === params.provider;
+    });
+
+    // If provider and icon params exists
+    if ( valid_provider && params.icon ) {
+
+
+
         response.send('success');
-    } else {
+
+
+
+    }
+    // Else, default response
+    else {
+
         response.send('not found');
+
     }
 
 });
