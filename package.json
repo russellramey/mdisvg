@@ -1,0 +1,13 @@
+{
+	"name": "ifsvg",
+	"version": "1.0.0",
+	"description": "Simple API that returns various Icon Font librarires (like FontAwesome) icons as svgs.",
+	"main": "app.js",
+	"dependencies": {
+		"express": "^4.16.4",
+		"path": "^0.12.7",
+		"async": "^2.6.2",
+		"svg-parser": "^2.0.4"
+	},
+	"license": "mit"
+}
