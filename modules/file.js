@@ -47,6 +47,18 @@ module.exports = {
         let icon = data.children[0].children[1].children[0].children.find( obj => {
             return obj.properties['glyph-name'] === args.icon;
         });
+
+        // If color param does not exist, use default
+        if(!args.color){
+            args.color = '000000';
+        }
+
+        // If icon is found
+        if(icon){
+            // Add color to icon object
+            icon.color = args.color;
+        }
+
         // Return
         return icon;
     },

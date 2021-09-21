@@ -1,7 +1,5 @@
 /*jshint esversion: 8 */
 // Required dependencies
-const providers = require('./providers');
-
 // SVG module
 module.exports = {
 

@@ -4,10 +4,6 @@ const config = require('./config');
 
 // Required Modules
 const express = require("express");
-const fs = require("fs");
-const path = require("path");
-// const async = require("async");
-// const svgparse = require('svg-parser');
 const file = require('./modules/file');
 const svg = require('./modules/svg');
 const sendResponse = require('./modules/response');
@@ -17,60 +13,38 @@ var app = express();
 
 // Icon request
 // Main request of application, takes in paramters and returns Font Awesome icons
-app.get("/:provider/:icon/", function(request, response) {
+app.get("/i/:icon/", function(request, response) {
 
     // Process and gather request parameters
     let params = {
-        // Provider Name
-        provider: request.params.provider,
         // Icon Name
         icon: request.params.icon,
         // Icon Fill
-        color: request.query.color,
-        // Icon Style
-        style: request.query.style
+        color: request.query.color
     };
 
-    // Validate provider request
-    let valid_provider = config.providers.find(obj => {
-        return obj.slug === params.provider;
-    });
-
-    // If provider and icon params exists
-    if ( valid_provider && params.icon ) {
-
-        // If style param exists
-        if(params.style && valid_provider.styles[params.style]){
-            valid_provider = valid_provider.styles[params.style];
-        } else {
-            valid_provider = valid_provider.styles.default;
-        }
-
-        // If color param
-        if(!params.color){
-            params.color = '000000';
-        }
+    // If icon parameter exists
+    if ( params.icon ) {
 
         // Read file data
-        file.readFileData({ file: valid_provider }, ( data ) => {
+        file.readFileData({ file: config.font }, ( data ) => {
 
             // Get font
             let font = file.getFont(data);
             // Get icon
             let icon = file.getIcon(params, data);
-            // Send response
+
+            // If font and icon exists
             if(font && icon){
-                icon.color = params.color;
-                let result = svg.createSVG(font, icon);
+                // Create svg
+                let xml = svg.createSVG(font, icon);
                 // Send response
-                sendResponse(request, response, result);
+                sendResponse(request, response, xml);
             } else {
                 // Send response
                 sendResponse(request, response, svg.notFound());
             }
         });
-
-
 
     }
     // Else, default response
