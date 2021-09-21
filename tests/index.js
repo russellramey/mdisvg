@@ -3,7 +3,7 @@ const svgparse = require('svg-parser')
 
 var query = 'alarm-fill';
 
-var data = fs.readFileSync('../vendor/bootstrap/bootstrap-icons.svg', 'utf8');
+var data = fs.readFileSync('../vendor/fontawesome/regular.svg', 'utf8');
 
 var svg = svgparse.parse(data)
 

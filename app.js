@@ -6,8 +6,10 @@ const config = require('./config');
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-const async = require("async");
-const svgparse = require('svg-parser');
+// const async = require("async");
+// const svgparse = require('svg-parser');
+const file = require('./modules/file');
+const testsvg = require('./modules/svg');
 
 // Init Express, as app
 var app = express();
@@ -23,22 +25,53 @@ app.get("/:provider/:icon/", function(request, response) {
         // Icon Name
         icon: request.params.icon,
         // Icon Fill
-        fill: request.query.fill,
+        color: request.query.color,
         // Icon Style
         style: request.query.style
     };
 
     // Validate provider request
     let valid_provider = config.providers.find(obj => {
-        return obj.name === params.provider;
+        return obj.slug === params.provider;
     });
 
     // If provider and icon params exists
     if ( valid_provider && params.icon ) {
 
+        // If style param exists
+        if(params.style && valid_provider.styles[params.style]){
+            valid_provider = valid_provider.styles[params.style];
+        } else {
+            valid_provider = valid_provider.styles.default;
+        }
 
+        // If color param
+        if(!params.color){
+            params.color = '000000';
+        }
 
-        response.send('success');
+        // Read file data
+        file.readFileData({ file: valid_provider }, ( data ) => {
+
+            // Get font
+            let font = file.getFont(data);
+            // Get icon
+            let icon = file.getIcon(params, data);
+            // Send response
+            if(font && icon){
+                icon.color = params.color;
+                let result = testsvg(font, icon);
+                // Set headers
+                response.setHeader('Content-Type', 'image/svg+xml');
+                // Send response
+                response.send(result);
+
+                console.log(icon);
+            } else {
+                // Send response
+                response.send('not found');
+            }
+        });
 
 
 

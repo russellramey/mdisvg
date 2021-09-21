@@ -5,34 +5,26 @@ const config = {
     providers: [
         {
             name: 'bootstrap',
+            slug: 'bs',
             styles: {
                 default: './vendor/bootstrap/bootstrap-icons.svg'
             }
         },
         {
             name: 'fontawesome',
+            slug: 'fa',
             styles: {
-                default: './vendor/bootstrap/bootstrap-icons.svg',
-                solid: './vendor/bootstrap/bootstrap-icons.svg',
-                brand: './vendor/bootstrap/bootstrap-icons.svg'
-            }
-        },
-        {
-            name: 'foundation',
-            styles: {
-                default: './vendor/bootstrap/bootstrap-icons.svg'
+                default: './vendor/fontawesome/regular.svg',
+                solid: './vendor/fontawesome/solid.svg',
+                brand: './vendor/fontawesome/brands.svg',
+                regular: './vendor/fontawesome/regular.svg'
             }
         },
         {
             name: 'materialdesignicons',
+            slug: 'mdi',
             styles: {
                 default: './vendor/materialdesignicons/materialdesignicons-webfont.svg'
-            }
-        },
-        {
-            name: 'ionicons',
-            styles: {
-                default: './vendor/ionicons/materialdesignicons-webfont.svg'
             }
         }
     ]
