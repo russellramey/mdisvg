@@ -14,7 +14,7 @@ const config = {
             name: 'fontawesome',
             slug: 'fa',
             styles: {
-                default: './vendor/fontawesome/regular.svg',
+                default: './vendor/fontawesome/solid.svg',
                 solid: './vendor/fontawesome/solid.svg',
                 brand: './vendor/fontawesome/brands.svg',
                 regular: './vendor/fontawesome/regular.svg'

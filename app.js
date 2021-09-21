@@ -9,7 +9,8 @@ const path = require("path");
 // const async = require("async");
 // const svgparse = require('svg-parser');
 const file = require('./modules/file');
-const testsvg = require('./modules/svg');
+const svg = require('./modules/svg');
+const sendResponse = require('./modules/response');
 
 // Init Express, as app
 var app = express();
@@ -60,16 +61,12 @@ app.get("/:provider/:icon/", function(request, response) {
             // Send response
             if(font && icon){
                 icon.color = params.color;
-                let result = testsvg(font, icon);
-                // Set headers
-                response.setHeader('Content-Type', 'image/svg+xml');
+                let result = svg.createSVG(font, icon);
                 // Send response
-                response.send(result);
-
-                console.log(icon);
+                sendResponse(request, response, result);
             } else {
                 // Send response
-                response.send('not found');
+                sendResponse(request, response, svg.notFound());
             }
         });
 
@@ -79,7 +76,8 @@ app.get("/:provider/:icon/", function(request, response) {
     // Else, default response
     else {
 
-        response.send('not found');
+        // Send response
+        sendResponse(request, response, svg.notFound());
 
     }
 

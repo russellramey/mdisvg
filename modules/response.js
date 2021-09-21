@@ -1,6 +1,7 @@
 /*jshint esversion: 6 */
-// Response module
-const sendResponse = function sendResponse(request, response, data) {
+// Resonpse modules
+// Send response with headers and data
+const sendResponse = function(request, response, data) {
 
     // Set response header to allow CORS
     response.header("Access-Control-Allow-Origin", "*");
@@ -15,19 +16,14 @@ const sendResponse = function sendResponse(request, response, data) {
     // Else, return requested data obj
     else {
 
-        // If color parameter exists
-        if (request.query.fill){
-            // Take data string and add fill style to all <paths>
-            data = data.replace(/<path/g, '<path style="fill:#' + request.query.fill + '"');
-        }
-
         // Set response header to img/svg
         response.header('Content-Type', 'image/svg+xml');
+
         // Send response
         response.send(data);
 
     }
 };
 
-// Custom modules
+// Export
 module.exports = sendResponse;
