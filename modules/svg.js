@@ -33,6 +33,6 @@ module.exports = {
 
     // Not found / Default icon
     notFound: function notFound(){
-        return '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="300" height="300" viewBox="0.0663408 64.0662 640.004 448.1"><g transform="scale(1,-1) translate(84, -480.0331)"><path fill="red" d="M400 416c26.5 0 48 -21.5 48 -48v-352c0 -26.5 -21.5 -48 -48 -48h-352c-26.5 0 -48 21.5 -48 48v352c0 26.5 21.5 48 48 48h352zM394 16c3.2998 0 6 2.7002 6 6v340c0 3.2998 -2.7002 6 -6 6h-340c-3.2998 0 -6 -2.7002 -6 -6v-340c0 -3.2998 2.7002 -6 6 -6h340z"/></g></svg>';
+        return '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100" height="100" viewBox="0 64.7273 512 448.462"><g transform="scale(1,-1) translate(0, -480.36365)"><path data-glyph="404" fill="red" d="M384 64h-256v256h256v-256zM384 363h-256q-18 0 -30.5 -12.5t-12.5 -30.5v-256q0 -18 12.5 -30.5t30.5 -12.5h256q18 0 30.5 12.5t12.5 30.5v256q0 18 -12.5 30.5t-30.5 12.5z"/></g></svg>';
     }
 };
