@@ -55,11 +55,28 @@ module.exports = {
 
         // If icon is found
         if(icon){
+
             // Add color to icon object
             icon.color = args.color;
+
+        } else {
+
+            // Default icon object
+            icon = {
+                type: 'element',
+                tagName: 'glyph',
+                properties:{
+                    'glyph-name': args.icon,
+                    unicode: null,
+                    d: "M400 416c26.5 0 48 -21.5 48 -48v-352c0 -26.5 -21.5 -48 -48 -48h-352c-26.5 0 -48 21.5 -48 48v352c0 26.5 21.5 48 48 48h352zM394 16c3.2998 0 6 2.7002 6 6v340c0 3.2998 -2.7002 6 -6 6h-340c-3.2998 0 -6 -2.7002 -6 -6v-340c0 -3.2998 2.7002 -6 6 -6h340z"
+                },
+                children: [],
+                color: args.color
+            };
+
         }
 
         // Return
         return icon;
-    },
+    }
 };
