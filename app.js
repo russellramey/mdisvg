@@ -77,18 +77,18 @@ app.get("/json", cors(), function(request, response) {
                 // Get font
                 let font = file.getFont(data);
 
+                // For each icon in icons array
                 icons.forEach( icon => {
-                    console.log(icon);
                     // Get icon
                     icon = file.getIcon(icon, data);
 
                     // If font and icon exists
                     if(font && icon){
                         // Create svg
-                        icon.svg = svg.createSVG(font, icon);
+                        icon.rendered = svg.createSVG(font, icon);
                     }
 
-                    // Send response
+                    // push icon object to new json array
                     json.push(icon);
 
                 });

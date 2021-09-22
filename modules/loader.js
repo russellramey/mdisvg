@@ -40,7 +40,7 @@ window.addEventListener('load', function(){
                     return obj.properties['glyph-name'] === icon.dataset.mdisvg;
                 });
                 // Replace element html
-                icon.innerHTML = svg.svg;
+                icon.innerHTML = svg.rendered;
             });
 
         }).catch(function (err) {
