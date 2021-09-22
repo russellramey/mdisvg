@@ -93,14 +93,14 @@ app.get("/json", cors(), function(request, response) {
 
                 });
 
-                // Return response
-                response.json(json);
+                // Send response
+                sendResponse(request, response, json);
             });
 
         } catch (err) {
 
-            // Return response
-            response.json(err);
+            // Send response
+            sendResponse(request, response, err);
 
         }
     } else {

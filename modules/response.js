@@ -7,7 +7,7 @@ const sendResponse = function(request, response, data) {
     response.header("Access-Control-Allow-Origin", "*");
 
     // If JSON, return json object
-    if (request.params.style === 'json'){
+    if (request.path === '/json'){
 
         // Send response
         response.json(data);
