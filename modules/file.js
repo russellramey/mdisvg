@@ -35,6 +35,7 @@ module.exports = {
     getFont: function getFont(data) {
         // Find glyph in object
         let font = data.children[0].children[1].children[0].children.find( obj => {
+            // Return font element if found
             return obj.tagName === 'font-face';
         });
         // Return
@@ -45,6 +46,9 @@ module.exports = {
     getIcon: function findIcon(args, data) {
         // Find glyph in object
         let icon = data.children[0].children[1].children[0].children.find( obj => {
+            // Remove 'mdi-' prefix, if it exists
+            args.icon = args.icon.replace('mdi-', '');
+            // Return icon element if found
             return obj.properties['glyph-name'] === args.icon;
         });
 
