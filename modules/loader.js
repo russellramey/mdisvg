@@ -37,7 +37,7 @@ window.addEventListener('load', function(){
             icons.forEach( function(icon){
                 // Find glyph in object
                 var svg = data.find( function(obj){
-                    return obj.properties['glyph-name'] === icon.dataset.mdisvg;
+                    return obj.name === icon.dataset.mdisvg;
                 });
                 // Replace element html
                 icon.innerHTML = svg.rendered;

@@ -14,7 +14,7 @@ var app = express();
 
 // Icon request
 // Main request of application, takes in paramters and returns Font Awesome icons
-app.get("/i/:icon/", function(request, response) {
+app.get("/i/:icon/", cors(), function(request, response) {
 
     // Process and gather request parameters
     let params = {
@@ -89,7 +89,15 @@ app.get("/json", cors(), function(request, response) {
                     }
 
                     // push icon object to new json array
-                    json.push(icon);
+                    json.push({
+                        name: icon.properties['glyph-name'],
+                        attributes: {
+                            color: icon.color,
+                            unicode: icon.properties.unicode,
+                            path: icon.properties.d,
+                        },
+                        rendered: icon.rendered
+                    });
 
                 });
 
