@@ -1,25 +1,18 @@
-# ICON FONTS AS SVG
-Simple API that returns various Icon Font librarires (like FontAwesome) icons as svgs.
+# MDI AS SVG
+Simple API that returns svg icons of the popular Material Design Icons font..
 
-## Providers 
-- Bootstrap: https://github.com/twbs/icons/tree/main/font/fonts
-- FontAwesome: https://github.com/FortAwesome/Font-Awesome/tree/master/webfonts
-- Material Design Icons: https://github.com/material-icons/material-icons-font/tree/master/font
-- Google Material Icons: https://github.com/google/material-design-icons/tree/master/font
-- Foundation: https://raw.githubusercontent.com/zurb/foundation-icon-fonts/master/foundation-icons.svg
-- Ion: https://raw.githubusercontent.com/ionic-team/ionicons/master/docs/fonts/ionicons.svg
+## Providers
+- Material Design Icons: https://materialdesignicons.com/
 
 ## URL Structure
-### Image/Object/Embed
-{domain}/provider/icon
-- Provider: icons set name/vendor
-- Icon: name of icon (typiclly classed used to render font icon)
+{domain}/version/icon
+- Version: version of the API (Read Docs)
+- Icon: name of icon (typically the name of the icon found in MDI documentation)
 
 ### JSON/SVG Source
-{domain}/json
-- Data: Json body with multiple icons
+{domain}/json?data=
+- Data: Json body with multiple icons: `{icon: 'iconname', color: 'hexcode', size: 100}`
 
-## URL Params
-- Style: Change style of icon if provider supports it
-- Fill: Change fill/color of icon
-- Format: Change format of icon (json, svg, source)
+## URL Query Params
+- color: Change size of icon artboard (svg canvas)
+- size: Change fill/color of icon
