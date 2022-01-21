@@ -21,7 +21,7 @@ module.exports = {
         let ascent = font.properties.ascent + (viewbox[1] / 2);
 
         // SVG Markup
-        let svg = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100" height="100" viewBox="' + viewbox.join(' ') + '">' +
+        let svg = '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="' + icon.size + '" height="' + icon.size + '" viewBox="' + viewbox.join(' ') + '">' +
                         '<g transform="scale(1,-1) translate(' + Math.abs(font.properties.descent) +', -'+ ascent +')">' +
                             '<path data-glyph="' + icon.properties['glyph-name'] + '" fill="#' + icon.color + '" d="' + icon.properties.d + '"/>' +
                         '</g>' +

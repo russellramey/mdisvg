@@ -57,11 +57,18 @@ module.exports = {
             args.color = '000000';
         }
 
+        // If size param does not exist, use default
+        if(!args.size){
+            args.size = 100;
+        }
+
         // If icon is found
         if(icon){
 
             // Add color to icon object
             icon.color = args.color;
+            // Add size to icon object
+            icon.size = args.size;
 
         } else {
 
@@ -75,7 +82,8 @@ module.exports = {
                     d: "M384 64h-256v256h256v-256zM384 363h-256q-18 0 -30.5 -12.5t-12.5 -30.5v-256q0 -18 12.5 -30.5t30.5 -12.5h256q18 0 30.5 12.5t12.5 30.5v256q0 18 -12.5 30.5t-30.5 12.5z"
                 },
                 children: [],
-                color: args.color
+                color: args.color,
+                size: args.size
             };
 
         }

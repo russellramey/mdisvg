@@ -16,12 +16,14 @@ var app = express();
 // Main request of application, takes in paramters and returns Font Awesome icons
 app.get("/i/:icon/", cors(), function(request, response) {
 
-    // Process and gather request parameters
+    // Parse request parameters
     let params = {
         // Icon Name
         icon: request.params.icon,
         // Icon Fill
-        color: request.query.color
+        color: request.query.color,
+        // Icon Size
+        size: request.query.size
     };
 
     // If icon parameter exists
@@ -93,6 +95,7 @@ app.get("/json", cors(), function(request, response) {
                         name: icon.properties['glyph-name'],
                         attributes: {
                             color: icon.color,
+                            size: icon.size,
                             unicode: icon.properties.unicode,
                             path: icon.properties.d,
                         },
@@ -134,8 +137,6 @@ app.get("/", function(request, response) {
 
 // Start server, and listen
 app.listen(3000, function() {
-
     // Server status
     console.log("Server running on port 3000");
-
 });
