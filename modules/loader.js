@@ -21,33 +21,34 @@ window.addEventListener('load', function(){
         }
 
         // Fetch icons via api json method
-        fetch('http://localhost:3000/json?data=' + JSON.stringify(json)).then(function (response) {
+        fetch('http://localhost:3000/v1/json?data=' + JSON.stringify(json))
+            .then(function (response) {
 
-        	// The API call was successful!
-        	if (response.ok) {
-        		return response.json();
-        	}
+            	// The API call was successful!
+            	if (response.ok) {
+            		return response.json();
+            	}
 
-        	// There was an error
-        	return Promise.reject(response);
+            	// There was an error
+            	return Promise.reject(response);
 
-        }).then(function (data) {
+            }).then(function (data) {
 
-            // For each element, get request icon name
-            icons.forEach( function(icon){
-                // Find glyph in object
-                var svg = data.find( function(obj){
-                    return obj.name === icon.dataset.mdisvg;
+                // For each element, get request icon name
+                icons.forEach( function(icon){
+                    // Find glyph in object
+                    var svg = data.find( function(obj){
+                        return obj.name === icon.dataset.mdisvg;
+                    });
+                    // Replace element html
+                    icon.innerHTML = svg.rendered;
                 });
-                // Replace element html
-                icon.innerHTML = svg.rendered;
+
+            }).catch(function (err) {
+
+            	// There was an error
+            	console.warn('Something went wrong.', err);
+
             });
-
-        }).catch(function (err) {
-
-        	// There was an error
-        	console.warn('Something went wrong.', err);
-
-        });
     }
 });

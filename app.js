@@ -1,23 +1,35 @@
 /*jshint esversion: 6 */
-// App config
-const config = require('./config');
-
-// Required Modules
+/**
+ *
+ * Dependencies
+ *
+ **/
 const express = require("express");
 const cors = require('cors');
 const file = require('./modules/file');
 const svg = require('./modules/svg');
 const sendResponse = require('./modules/response');
+const config = require('./config');
 
-// Init Express, as app
+/**
+ *
+ * Config
+ *
+ **/
 var app = express();
 
-// Icon request
+/**
+ *
+ * Routes
+ *
+ **/
 // Main request of application, takes in paramters and returns Font Awesome icons
-app.get("/i/:icon/", cors(), function(request, response) {
+app.get("/:version/i/:icon/", cors(), function(request, response) {
 
     // Parse request parameters
     let params = {
+        // Font Version
+        version: request.params.version,
         // Icon Name
         icon: request.params.icon,
         // Icon Fill
@@ -26,11 +38,18 @@ app.get("/i/:icon/", cors(), function(request, response) {
         size: request.query.size
     };
 
+    if (!config[params.version]) {
+        // Send response
+        return sendResponse(request, response, svg.notFound());
+    }
+
     // If icon parameter exists
-    if ( params.icon ) {
+    if (params.icon) {
 
         // Read file data
-        file.readFileData({ file: config.font }, ( data ) => {
+        file.readFileData({
+            file: config[params.version].font
+        }, (data) => {
 
             // Get font
             let font = file.getFont(data);
@@ -38,14 +57,14 @@ app.get("/i/:icon/", cors(), function(request, response) {
             let icon = file.getIcon(params, data);
 
             // If font and icon exists
-            if(font && icon){
+            if (font && icon) {
                 // Create svg
                 let xml = svg.createSVG(font, icon);
                 // Send response
-                sendResponse(request, response, xml);
+                return sendResponse(request, response, xml);
             } else {
                 // Send response
-                sendResponse(request, response, svg.notFound());
+                return sendResponse(request, response, svg.notFound());
             }
         });
 
@@ -54,38 +73,47 @@ app.get("/i/:icon/", cors(), function(request, response) {
     else {
 
         // Send response
-        sendResponse(request, response, svg.notFound());
+        return sendResponse(request, response, svg.notFound());
 
     }
 
 });
-
-// Icons as JSON
 // JSON endpoint accepts json request body for multiple icons
-app.get("/json", cors(), function(request, response) {
+app.get("/:version/json", cors(), function(request, response) {
 
     // Json container
     let json = [];
 
+    // If version does not exist
+    if (!config[request.params.version]) {
+        // Send response
+        return sendResponse(request, response, {
+            error: true,
+            message: 'No version found'
+        });
+    }
+
     // If required parameter exists (data)
-    if(request.query.data){
+    if (request.query.data) {
         // Try / Catch
-        try{
+        try {
             // Get requested icons
             let icons = JSON.parse(request.query.data);
             // Read file data
-            file.readFileData({ file: config.font }, ( data ) => {
+            file.readFileData({
+                file: config[request.params.version].font
+            }, (data) => {
 
                 // Get font
                 let font = file.getFont(data);
 
                 // For each icon in icons array
-                icons.forEach( icon => {
+                icons.forEach(icon => {
                     // Get icon
                     icon = file.getIcon(icon, data);
 
                     // If font and icon exists
-                    if(font && icon){
+                    if (font && icon) {
                         // Create svg
                         icon.rendered = svg.createSVG(font, icon);
                     }
@@ -105,18 +133,18 @@ app.get("/json", cors(), function(request, response) {
                 });
 
                 // Send response
-                sendResponse(request, response, json);
+                return sendResponse(request, response, json);
             });
 
         } catch (err) {
 
             // Send response
-            sendResponse(request, response, err);
+            return sendResponse(request, response, err);
 
         }
     } else {
         // Return error
-        response.json({
+        return response.json({
             status: 'error',
             message: 'JSON ojbect string required as data parameter.'
         });
@@ -132,10 +160,14 @@ app.get("/loader", function(request, response) {
 
 // Default
 app.get("/", function(request, response) {
-	response.redirect('https://google.com');
+    response.redirect('https://google.com');
 });
 
-// Start server, and listen
+/**
+ *
+ * Server
+ *
+ **/
 app.listen(3000, function() {
     // Server status
     console.log("Server running on port 3000");

@@ -1,5 +1,9 @@
 /*jshint esversion: 6 */
-// Resonpse modules
+/**
+ *
+ * Reponse functions
+ *
+ **/
 // Send response with headers and data
 const sendResponse = function(request, response, data) {
 
@@ -7,7 +11,7 @@ const sendResponse = function(request, response, data) {
     response.header("Access-Control-Allow-Origin", "*");
 
     // If JSON, return json object
-    if (request.path === '/json'){
+    if (request.path.includes('/json')){
 
         // Send response
         response.json(data);
@@ -25,5 +29,9 @@ const sendResponse = function(request, response, data) {
     }
 };
 
-// Export
+/**
+ *
+ * Export
+ *
+ **/
 module.exports = sendResponse;
