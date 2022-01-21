@@ -14,7 +14,8 @@ window.addEventListener('load', function(){
             // Build icon object
             var icon = {
                 icon: icons[i].dataset.mdisvg,
-                color: icons[i].dataset.mdicolor
+                color: icons[i].dataset.mdicolor,
+                size: icons[i].dataset.mdisize
             };
             // Add icon to json array
             json[i] = icon;
