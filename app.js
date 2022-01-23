@@ -168,7 +168,7 @@ app.get("/", function(request, response) {
  * Server
  *
  **/
-app.listen(3000, function() {
+app.listen(3030, function() {
     // Server status
     console.log("Server running on port 3000");
 });
