@@ -22,7 +22,7 @@ window.addEventListener('load', function(){
         }
 
         // Fetch icons via api json method
-        fetch('http://localhost:3000/v1/json?data=' + JSON.stringify(json))
+        fetch('https://api.mdisvg.com/v1/json?data=' + JSON.stringify(json))
             .then(function (response) {
 
             	// The API call was successful!
