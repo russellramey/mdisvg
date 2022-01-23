@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  jsonipsum:
+  mdisvg:
     build: .
     container_name: mdisvg
     ports:
