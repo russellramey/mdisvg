@@ -21,7 +21,3 @@ Supported query parameters:
 ### JSON/SVG Source
 **api.mdisvg.com/{version}/json?data=**
 - Data: Json body with multiple icons: `{icon: 'iconname', color: 'hexcode', size: 100}`
-
-## URL Query Params
-- color: Change size of icon artboard (svg canvas)
-- size: Change fill/color of icon
