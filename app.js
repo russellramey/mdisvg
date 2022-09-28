@@ -170,5 +170,5 @@ app.get("/", function(request, response) {
  **/
 app.listen(3030, function() {
     // Server status
-    console.log("Server running on port 3000");
+    console.log("Server running on port 3030");
 });
